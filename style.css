@@ -1,0 +1,156 @@
+:root{
+  --bg:#0b0c10;
+  --panel:#14161a;
+  --ink:#e7e9ee;
+  --muted:#9aa3af;
+  --accent:#3b82f6;
+  --paper:#ffffff;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font:14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  color:var(--ink);
+  background: radial-gradient(1200px 600px at 10% -10%, #1b2434 0%, #0b0c10 40%, #0b0c10 100%);
+}
+
+/* Header */
+.app-header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 20px;
+  position:sticky; top:0; z-index:10;
+  background:rgba(11,12,16,.7); backdrop-filter: blur(6px);
+  border-bottom:1px solid #1f2937;
+}
+.app-header h1{margin:0; font-size:18px; letter-spacing:.3px}
+.header-actions{display:flex; gap:10px; align-items:center}
+select, input[type="color"], .btn{
+  background:#101317; color:var(--ink); border:1px solid #253042;
+  padding:8px 10px; border-radius:10px;
+}
+.btn{cursor:pointer; transition:transform .05s ease}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--accent); border-color:transparent; color:#fff}
+.btn.danger{border-color:#7f1d1d; color:#fecaca; background:#1f0b0b}
+
+.badge{
+  background:#0f2a18; color:#a7f3d0; border:1px solid #065f46;
+  padding:6px 10px; border-radius:999px; font-size:12px;
+}
+
+/* Layout */
+.grid{
+  display:grid; grid-template-columns: 420px 1fr; gap:16px;
+  padding:16px; align-items:start;
+}
+.panel{
+  background:var(--panel); border:1px solid #1f2937; border-radius:14px;
+  padding:16px; box-shadow:var(--shadow);
+}
+.preview-area{position:sticky; top:74px; height:calc(100vh - 90px); overflow:auto}
+.resume{
+  width:210mm; min-height:297mm; margin:0 auto 24px; padding:22mm 22mm;
+  background:var(--paper); color:#111827; border-radius:12px; box-shadow:var(--shadow);
+}
+
+/* Form */
+h2,h3{margin:.2rem 0 .6rem}
+hr{border:0; border-top:1px solid #253042; margin:14px 0}
+.form-grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:10px;
+}
+.form-grid .full{grid-column:1 / -1}
+label{display:grid; gap:6px; font-size:12px; color:var(--muted)}
+input, textarea{
+  background:#0f1217; color:var(--ink); border:1px solid #253042; border-radius:10px; padding:10px 12px;
+}
+textarea{resize:vertical}
+.section-header{display:flex; align-items:center; justify-content:space-between; margin-top:8px}
+.row-actions{display:flex; gap:8px}
+.stack{display:grid; gap:10px}
+.card{
+  background:#0e1116; border:1px solid #253042; border-radius:12px; padding:12px;
+}
+.card .row{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+.small{font-size:12px; color:var(--muted)}
+.row-3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px}
+.controls{display:flex; gap:8px; justify-content:flex-end; margin-top:8px}
+
+/* Suggest control near inputs */
+.suggest-inline{
+  display:flex; gap:8px; align-items:center; margin-top:6px;
+}
+.suggest-inline .mini{font-size:12px; padding:6px 8px}
+
+/* Chips */
+.chip-input{display:grid; gap:8px}
+.chips{display:flex; flex-wrap:wrap; gap:8px}
+.chip{
+  background:#0f1625; color:#cfe3ff; border:1px solid #203154; padding:6px 10px; border-radius:999px; display:flex; gap:6px; align-items:center; font-size:12px;
+}
+.chip button{
+  border:none; background:transparent; color:#90b4ff; cursor:pointer; padding:0 2px;
+}
+.danger-chips .chip{background:#1a1010; color:#fecaca; border-color:#7f1d1d}
+
+/* Resume content */
+.resume-header h1{margin:0; font-size:28px}
+.resume-header .muted{color:#6b7280}
+.links{font-size:12px}
+.resume-section{margin-top:16px}
+.resume-section h2{
+  font-size:13px; letter-spacing:.6px; text-transform:uppercase; color:#374151;
+  padding-bottom:4px; border-bottom:2px solid var(--accent, #3b82f6);
+  margin:0 0 8px 0;
+}
+.vstack{display:grid}
+.gap{gap:10px}
+.item h3{margin:0; font-size:14px}
+.item .meta{display:flex; gap:10px; font-size:12px; color:#6b7280}
+
+/* TEMPLATES */
+.resume.minimal{}
+.resume.modern .resume-header{display:flex; align-items:flex-end; justify-content:space-between}
+.resume.modern .resume-header h1{font-size:30px}
+.resume.compact{font-size:12px}
+.resume.compact .resume-header h1{font-size:24px}
+
+/* Accent color (set via inline style in JS) */
+.resume .resume-section h2{border-color:var(--accent)}
+
+/* ATS highlighting */
+.skill-list li{margin:2px 0}
+.skill-hit{background:#ecfdf5; border-left:4px solid #10b981; padding:2px 6px; border-radius:6px}
+.skill-miss{opacity:.7}
+.missing-wrap{margin-top:8px; font-size:12px; color:#991b1b}
+
+/* Modal */
+dialog{
+  border:none; border-radius:12px; padding:16px; width:min(560px, 92vw);
+  background:#0f1217; color:var(--ink); border:1px solid #253042;
+}
+dialog::backdrop{background:rgba(0,0,0,.6)}
+.suggest-list{display:grid; gap:8px; padding-left:18px}
+.suggest-list li{list-style:disc}
+.suggest-list input{margin-right:8px}
+
+/* ATS results grid */
+.ats-results{
+  display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:8px;
+}
+
+/* Footer */
+.app-footer{
+  padding:10px 16px; color:#9aa3af; font-size:12px; text-align:center;
+}
+
+/* Print (A4) */
+@media print{
+  body{background:#fff}
+  .app-header, .panel, .app-footer{display:none !important}
+  .preview-area{all:unset}
+  .resume{box-shadow:none; margin:0; width:auto; min-height:auto; padding:0}
+}

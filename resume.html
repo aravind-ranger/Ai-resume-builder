@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI-Style Resume Builder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>AI-Style Resume Builder</h1>
+    <div class="header-actions">
+      <div id="atsBadge" class="badge">ATS: —</div>
+
+      <select id="templateSelect" title="Template">
+        <option value="minimal">Minimal</option>
+        <option value="modern">Modern</option>
+        <option value="compact">Compact</option>
+      </select>
+
+      <input type="color" id="accentColor" value="#3b82f6" title="Accent color" />
+      <button id="printBtn" class="btn primary">Download PDF</button>
+    </div>
+  </header>
+
+  <main class="grid">
+    <!-- ========== LEFT: FORM ========== -->
+    <section class="panel">
+      <h2>Details</h2>
+
+      <div class="form-grid">
+        <label>Full Name
+          <input id="name" placeholder="e.g., Harish Kumar" />
+        </label>
+
+        <label>Title / Role
+          <input id="role" placeholder="e.g., Frontend Developer" />
+        </label>
+
+        <label>Email
+          <input id="email" type="email" placeholder="you@mail.com" />
+        </label>
+
+        <label>Phone
+          <input id="phone" placeholder="+91-98765-43210" />
+        </label>
+
+        <label>Location
+          <input id="location" placeholder="Chennai, IN" />
+        </label>
+
+        <label>Website / LinkedIn / GitHub
+          <input id="website" placeholder="linkedin.com/in/you | github.com/you" />
+        </label>
+
+        <label class="full">Summary
+          <textarea id="summary" rows="4" placeholder="2–3 lines about you..."></textarea>
+        </label>
+      </div>
+
+      <hr />
+
+      <!-- Skills -->
+      <h3>Skills</h3>
+      <div class="chip-input">
+        <input id="skillInput" placeholder="Type a skill and press Enter" />
+        <div id="skillsList" class="chips"></div>
+      </div>
+
+      <hr />
+
+      <!-- Experience -->
+      <div class="section-header">
+        <h3>Experience</h3>
+        <div class="row-actions">
+          <button class="btn" id="addExp">+ Add</button>
+        </div>
+      </div>
+      <div id="expWrap" class="stack"></div>
+
+      <hr />
+
+      <!-- Education -->
+      <div class="section-header">
+        <h3>Education</h3>
+        <button class="btn" id="addEdu">+ Add</button>
+      </div>
+      <div id="eduWrap" class="stack"></div>
+
+      <hr />
+
+      <!-- Projects -->
+      <div class="section-header">
+        <h3>Projects</h3>
+        <button class="btn" id="addProj">+ Add</button>
+      </div>
+      <div id="projWrap" class="stack"></div>
+
+      <hr />
+
+      <!-- ATS ANALYZER -->
+      <div class="section-header">
+        <h3>ATS Analyzer (Paste Job Description)</h3>
+        <div class="row-actions">
+          <button id="analyzeBtn" class="btn">Analyze JD</button>
+          <button id="clearJD" class="btn danger">Clear</button>
+        </div>
+      </div>
+      <textarea id="jdText" rows="6" placeholder="Paste Job Description here..."></textarea>
+      <div class="small">We’ll extract keywords, compute ATS score, and highlight matches.</div>
+
+      <div class="ats-results">
+        <div>
+          <h4>Extracted Keywords</h4>
+          <div id="jdKeywords" class="chips"></div>
+        </div>
+        <div>
+          <h4>Missing in Resume</h4>
+          <div id="missingKeywords" class="chips danger-chips"></div>
+        </div>
+      </div>
+
+      <div class="save-load">
+        <button id="saveBtn" class="btn">Save (Local)</button>
+        <button id="loadBtn" class="btn">Load</button>
+        <button id="clearBtn" class="btn danger">Clear</button>
+      </div>
+      <p class="hint">Tip: PDF export uses your browser’s Print → Save as PDF. Layout is optimized for A4.</p>
+    </section>
+
+    <!-- ========== RIGHT: LIVE PREVIEW ========== -->
+    <section class="preview-area">
+      <div id="resume" class="resume minimal">
+        <div class="resume-header">
+          <h1 id="pv-name">Your Name</h1>
+          <div id="pv-role" class="muted">Your Role</div>
+          <div id="pv-links" class="links muted">email | phone | location | website</div>
+        </div>
+
+        <section class="resume-section" id="pv-summary-sec">
+          <h2>Summary</h2>
+          <p id="pv-summary">Write a concise, impact-driven summary here.</p>
+        </section>
+
+        <section class="resume-section" id="pv-skills-sec">
+          <h2>Skills</h2>
+          <ul id="pv-skills" class="skill-list"></ul>
+          <div id="pv-missing" class="missing-wrap"></div>
+        </section>
+
+        <section class="resume-section" id="pv-exp-sec">
+          <h2>Experience</h2>
+          <div id="pv-exp" class="vstack gap"></div>
+        </section>
+
+        <section class="resume-section" id="pv-edu-sec">
+          <h2>Education</h2>
+          <div id="pv-edu" class="vstack gap"></div>
+        </section>
+
+        <section class="resume-section" id="pv-proj-sec">
+          <h2>Projects</h2>
+          <div id="pv-proj" class="vstack gap"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <span>Made with ♥ — customize & export</span>
+  </footer>
+
+  <!-- Suggestion Modal -->
+  <dialog id="suggestModal">
+    <h3>✨ AI Suggest Bullets (Local Stub)</h3>
+    <div id="suggestInfo" class="small"></div>
+    <ul id="suggestList" class="suggest-list"></ul>
+    <div class="controls">
+      <button id="suggestUse" class="btn primary">Use Selected</button>
+      <button id="suggestClose" class="btn">Close</button>
+    </div>
+  </dialog>
+
+  <script src="function.js"></script>
+</body>
+</html>
